@@ -41,7 +41,21 @@ class WordGuesserApp < Sinatra::Base
   post '/guess' do
     params[:guess].to_s[0]
     ### YOUR CODE HERE ###
-    redirect '/show'
+    begin
+      @game.guess(params[:guess])
+    rescue ArgumentError => e
+      flash[:message] = e.message
+    end
+    case @game.check_win_or_lose
+    when :show
+      redirect '/show'
+    when :win
+      redirect '/win'
+    when :lose
+      redirect '/lose'
+    else
+      raise "Unknown game state"
+    end
   end
 
   # Everytime a guess is made, we should eventually end up at this route.
