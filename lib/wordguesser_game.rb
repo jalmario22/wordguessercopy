@@ -27,14 +27,14 @@ class WordGuesserGame
       if not @guesses.include?(letter)
         @guesses+=letter
       else
-        raise ArgumentError, "You have already used that letter."
+        # raise ArgumentError, "You have already used that letter."
         return false
       end
     else 
       if not @wrong_guesses.include?(letter)
         @wrong_guesses+=letter
       else
-        raise ArgumentError, "You have already used that letter."
+        # raise ArgumentError, "You have already used that letter."
         return false
       end
     end
@@ -43,7 +43,7 @@ class WordGuesserGame
   def check_win_or_lose
     if @wrong_guesses.length >= 7
       :lose
-    elsif self.word_with_guesses == @word
+    elsif word_with_guesses == @word
       :win
     else
       :play
